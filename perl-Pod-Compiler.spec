@@ -3,7 +3,7 @@
 
 Name:       perl-%{upstream_name}
 Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 1
+Release:    %mkrel 2
 
 Summary:    Compile POD into an object tree
 License:    GPL+ or Artistic
@@ -19,16 +19,10 @@ BuildArch: noarch
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
-The following section describes the objects returned by Pod::Compiler and
-their methods. These objects all inherit from Tree::DAG_Node, so all
-methods described there are valid as well.
-
-The set/retrieve methods all work in the following way: If no argument is
-specified, the corresponding value is returned. Otherwise the object's
-value is set to the given argument and returned.
-
-Common methods
-    The following methods are common for all the classes:
+This package, based on Pod::Parser, compiles a given POD document into an
+object tree (based on Tree::DAG_Node). It prints errors and warnings about the
+POD it reads. The result can be used to conveniently convert the POD into any
+other format.
 
 %prep
 %setup -q -n %{upstream_name}-%{upstream_version}
@@ -51,8 +45,8 @@ rm -rf %buildroot
 %files
 %defattr(-,root,root)
 %doc Changes README
+%{_bindir}/podlint
+%{_mandir}/man1/*
 %{_mandir}/man3/*
 %perl_vendorlib/*
-/usr/bin/podlint
-/usr/share/man/man1/podlint.1.lzma
 
