@@ -1,22 +1,22 @@
 %define upstream_name    Pod-Compiler
 %define upstream_version 0.20
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 3
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	4
 
-Summary:    Compile POD into an object tree
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/Pod/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Compile POD into an object tree
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Pod/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Pod::Parser)
-BuildRequires: perl(Storable)
-BuildRequires: perl(Test::Simple)
-BuildRequires: perl(Tree::DAG_Node)
-BuildArch: noarch
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(Pod::Parser)
+BuildRequires:	perl(Storable)
+BuildRequires:	perl(Test::Simple)
+BuildRequires:	perl(Tree::DAG_Node)
+BuildArch:	noarch
 
 %description
 This package, based on Pod::Parser, compiles a given POD document into an
@@ -28,25 +28,29 @@ other format.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
-%{make}
+perl Makefile.PL INSTALLDIRS=vendor
+%make
 
 %check
-%{make} test
+%make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes README
 %{_bindir}/podlint
 %{_mandir}/man1/*
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+%changelog
+* Sat Apr 23 2011 Funda Wang <fwang@mandriva.org> 0.200.0-3mdv2011.0
++ Revision: 657825
+- rebuild for updated spec-helper
+
+* Sat Dec 25 2010 Shlomi Fish <shlomif@mandriva.org> 0.200.0-2mdv2011.0
++ Revision: 625015
+- Update the file list and the description
+- import perl-Pod-Compiler
 
