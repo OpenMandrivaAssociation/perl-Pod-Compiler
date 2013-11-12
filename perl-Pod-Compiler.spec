@@ -1,15 +1,15 @@
 %define upstream_name    Pod-Compiler
-%define upstream_version 0.20
+%define upstream_version 0.21
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	4
+Release:	1
 
 Summary:	Compile POD into an object tree
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{upstream_name}
-Source0:	http://www.cpan.org/modules/by-module/Pod/%{upstream_name}-%{upstream_version}.tar.gz
+Source0:	http://www.cpan.org/modules/by-module/Pod/Pod-Compiler-%{upstream_version}.tar.gz
 
 BuildRequires:	perl-devel
 BuildRequires:	perl(Pod::Parser)
@@ -53,4 +53,5 @@ perl Makefile.PL INSTALLDIRS=vendor
 + Revision: 625015
 - Update the file list and the description
 - import perl-Pod-Compiler
+
 
